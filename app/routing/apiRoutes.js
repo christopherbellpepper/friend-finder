@@ -10,6 +10,6 @@ module.exports = function(app) {
     res.json(newFriend);
     });
 
-res.json({ ok: true });
+
 
 };
