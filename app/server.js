@@ -1,6 +1,6 @@
 var path = require("path");
 var express = require("express");
-var users = require("./data/friends");
+var friendsList = require("./data/friends.js");
 
 var app = express();
 
