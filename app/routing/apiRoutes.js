@@ -5,11 +5,16 @@ module.exports = function(app) {
     res.json(friendsList);
   });
 
+
+
   app.post("/api/friends", function(req, res) {
+
+
     var newFriendResults = req.body.scores;
     var scoresArr = [];
     var friendsCount = 0;
     var friendMatch = 0;
+
 
     //runs through all current friends in list
     for (var i = 0; i < friendsList.length; i++) {
@@ -29,11 +34,15 @@ module.exports = function(app) {
         friendMatch = i;
       }
     }
+
+            //pushes new submission into the friendsList array
+            friendsList.push(req.body);
     //return bestMatch data
-    var bestMatch = friendsList[bestMatch];
+    
+    var bestMatch = friendsList[friendMatch];
+    console.log(bestMatch)
     res.json(bestMatch);
 
-    //pushes new submission into the friendsList array
-    friendsList.push(req.body);
+
   });
 };

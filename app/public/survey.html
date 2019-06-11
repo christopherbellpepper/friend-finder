@@ -5,8 +5,9 @@
     <title>Friend Finder Survey</title>
 
     <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"/> -->
   </head>
 
   <body>
@@ -27,7 +28,7 @@
         <hr />
         <h3>Question 1</h3>
         <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
-        <select class="chosen-select" id="q1">
+        <select class="form-control" id="q1">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -39,7 +40,7 @@
 
         <h3>Question 2</h3>
         <h4>Generally speaking, you rely more on your experience than your imagination.</h4>
-        <select class="chosen-select" id="q2">
+        <select class="form-control" id="q2">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -51,7 +52,7 @@
 
         <h3>Question 3</h3>
         <h4>You find it easy to stay relaxed and focused even when there is some pressure.</h4>
-        <select class="chosen-select" id="q3">
+        <select class="form-control" id="q3">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -63,7 +64,7 @@
 
         <h3>Question 4</h3>
         <h4>You rarely do something just out of sheer curiosity.</h4>
-        <select class="chosen-select" id="q4">
+        <select class="form-control" id="q4">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -75,7 +76,7 @@
 
         <h3>Question 5</h3>
         <h4>People can rarely upset you.</h4>
-        <select class="chosen-select" id="q5">
+        <select class="form-control" id="q5">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -87,7 +88,7 @@
 
         <h3>Question 6</h3>
         <h4>It is often difficult for you to relate to other people’s feelings.</h4>
-        <select class="chosen-select" id="q6">
+        <select class="form-control" id="q6">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -99,7 +100,7 @@
 
         <h3>Question 7</h3>
         <h4>In a discussion, truth should be more important than people’s sensitivities.</h4>
-        <select class="chosen-select" id="q7">
+        <select class="form-control" id="q7">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -111,7 +112,7 @@
 
         <h3>Question 8</h3>
         <h4>You rarely get carried away by fantasies and ideas.</h4>
-        <select class="chosen-select" id="q8">
+        <select class="form-control" id="q8">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -123,7 +124,7 @@
 
         <h3>Question 9</h3>
         <h4>You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</h4>
-        <select class="chosen-select" id="q9">
+        <select class="form-control" id="q9">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -135,7 +136,7 @@
 
         <h3>Question 10</h3>
         <h4>You feel more energetic after spending time with a group of people.</h4>
-        <select class="chosen-select" id="q10">
+        <select class="form-control" id="q10">
           <option value=""></option>
           <option value="1">1 (Strongly Disagree)</option>
           <option value="2">2</option>
@@ -172,7 +173,7 @@
               <h2 id="match-name"></h2>
               <img
                 id="match-img"
-                src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg"
+                src=""
                 alt=""
               />
             </div>
@@ -195,6 +196,11 @@
       </footer>
     </div>
 
+    <script
+    src="https://code.jquery.com/jquery-3.4.1.js"
+    integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
         $("#submit").on("click", function() {
@@ -236,16 +242,19 @@
                 $("#q10").val()
               ]
             };
-            //Grabs current URL of website
-            var currentURL = window.location.origin;
+            console.log(newFriend);
             //AJAX posts the data to friends API.
-            $.post(currentURL + "/api/friends", newFriend, function(data) {
+            $.post("/api/friends", newFriend, function(data) {
               //Grab the result from the AJAX post so that the best match's name and photo are displayed.
-              $("#matchName").text(data.name);
-              $("#matchPic").attr("src", data.profilePic);
-            });
+              $("#match-name").text(data.name);
+              $("#match-img").attr("src", data.profilePic);
+
             // Show the modal with the best match
             $(".modal").modal();
+              console.log(data);
+            });
+
+
             //clear form after submission
             $("#name").val("");
             $("#photo").val("");
