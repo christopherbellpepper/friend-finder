@@ -261,7 +261,7 @@
                 $("#q10").val()
               ]
             };
-            console.log(newFriend);
+           
             //AJAX posts the data to friends API.
             $.post("/api/friends", newFriend, function(data) {
               //Grab the result from the AJAX post so that the best match's name and photo are displayed.
@@ -270,7 +270,7 @@
 
               // Show the modal with the best match
               $(".modal").modal();
-              console.log(data);
+            
             });
 
             //clear form after submission

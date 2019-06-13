@@ -35,7 +35,7 @@ module.exports = function(app) {
     //return bestMatch data
 
     var bestMatch = friendsList[friendMatch];
-    console.log(bestMatch);
+   
     res.json(bestMatch);
   });
 };
